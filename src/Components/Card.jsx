@@ -1,38 +1,35 @@
-import React from "react";
-// import Photo from "../images/book.jpg";
+import React, { useState } from "react";
+import Modal from "./Modal";
+const Card = ({ book }) => {
 
-
-function Card({book}) {
-    const [show, setShow] = React.useState(false);
-    const [bookItem, setBookItem] = React.useState();
+    const [show,setShow]=useState(false);
+    const [bookItem,setItem]=useState();
+    console.log(book)
     return (
         <>
             {
                 book.map((item) => {
-                    let thumbnail = item.volumeInfo.imageLinks && item.volumeInfo.imageLinks.smallThumbnail;
-                    let amount = item.saleInfo.listPrice && item.saleInfo.listPrice.amount;
-                    if(thumbnail != undefined && amount != undefined)
+                    let thumbnail=item.volumeInfo.imageLinks && item.volumeInfo.imageLinks.smallThumbnail;
+                    let amount=item.saleInfo.listPrice && item.saleInfo.listPrice.amount;
+                    if(thumbnail!= undefined && amount !=undefined)
                     {
-                        return(
+                        return (
                             <>
-                                <div 
-                                className="card"
-                                onClick={() => 
-                                {setShow(true), setBookItem(item)}
-                                }
-                                >
-                                    <img src={thumbnail}/>
+                            <div className="card" onClick={()=>{setShow(true);setItem(item)}}>
+                                <img src={thumbnail} alt="" />
                                 <div className="bottom">
                                     <h3 className="title">{item.volumeInfo.title}</h3>
-                                        <p className="amount">&#8377;{amount}</p>
+                                    <p className="amount">&#8377;{amount}</p>
                                 </div>
-                                </div>
-                                <Modal show={show} item={bookItem} onClose={() => setShow(false)}/>
+                            </div>
+                              <Modal show={show} item={bookItem} onClose={()=>setShow(false)}/>
                             </>
                         )
                     }
+                    
                 })
             }
+
         </>
     )
 }

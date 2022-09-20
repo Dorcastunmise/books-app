@@ -1,50 +1,43 @@
-import React from "react";
+import React, {useState}from "react";
 import Card from "./Card";
 import axios from "axios";
+import photo from "../images/rain-solo-time.gif"
 
-function Main() {
-    const [search, setSearch] = React.useState("");
-    const [bookData, setBookData] = React.useState([]);
-
-    const searchBook=(evt) => {
+const Main=()=>{
+    const [search,setSearch]=useState("");
+    const [bookData,setData]=useState([]);
+    const searchBook=(evt)=>{
         if(evt.key==="Enter")
         {
-            axios.get('https://www.googleapis.com/books/v1/volumes?q='+search+'&key=AIzaSyBI7w9JfGzUp8CZg22K-DRgI_RVqYlnteI'+'maxResults=40')
-            .then(res=>setBookData(res.data.items))
+            axios.get('https://www.googleapis.com/books/v1/volumes?q='+search+'&key=AIzaSyA6SaT23KNiiA6DnUfUQTvFeyAcQEkwnSU'+'&maxResults=40')
+            .then(res=>setData(res.data.items))
             .catch(err=>console.log(err))
         }
     }
-    return (
-        <div>
+    return(
+        <>
             <div className="header">
                 <div className="row1">
-                   <h1>A room without books is like <br></br>
-                    a body without a soul</h1>
+                    <h1>A room without books is like<br/> a body without a soul.</h1>
                 </div>
                 <div className="row2">
-                   <h2>Find Your Book</h2>
-                   <div className="search">
-                       <input
-                       type="text"
-                       placeholder="Book Title "
-                       value={search}
-                       onChange={event => 
-                       setSearch(event.target.value)
-                       }
-                       onKeyPress={searchBook}
-                       />
-                       <button><i className="fa-solid fa-magnifying-glass"></i></button>
+                    <h2>Find Your Book</h2>
+                    <div className="search">
+                        <input type="text" placeholder="Enter Your Book Name"
+                        value={search} onChange={e=>setSearch(e.target.value)}
+                        onKeyPress={searchBook}/>
+                        <button><i className="fas fa-search"></i></button>
                     </div>
-                       <img src="./src/images/rain-solo-time.gif"/>
+                    <img src={photo} alt="" />
                 </div>
             </div>
+
             <div className="container">
-                {
-                   <Card book={bookData}/>
-                }
+              {
+                    <Card book={bookData}/>
+              }  
             </div>
-        </div>
+        </>
     )
 }
-
 export default Main;
