@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://books-app-git-main-dorcastunmise.vercel.app/">
-    <img width="200" src="./public/Screenshot%20(201).png"/>  
+    <img width="400" height="300" src="./public/Screenshot%20(201).png"/>  
   </a>
 </p>
 <h1 align="center">Books App</h1>
